@@ -1,18 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
+import { Entity, Column, BaseEntity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class ShoppingCart extends BaseEntity {
 
   @PrimaryGeneratedColumn()
-  id!: number;
+  id!: string;
 
-  @Column() 
-  shoppingCartId!: number;
-
-  @Column()
-  productid!: number;
-
-  @Column()
-  quantity!: number;
+  @Column({ unique: true}) 
+  user!: string;
 
 }

@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm'; 
+import { Contents } from './entities/Contents'
 import { ShoppingCart } from './entities/ShoppingCart'
-import { User } from './entities/User'
 
 @Module({
   imports: [
@@ -14,7 +14,7 @@ import { User } from './entities/User'
       username: 'root',
       password: 'root',
       database: 'shoppingcart',
-      entities: [User, ShoppingCart],
+      entities: [Contents, ShoppingCart],
       synchronize: true,
     }),
   ],
