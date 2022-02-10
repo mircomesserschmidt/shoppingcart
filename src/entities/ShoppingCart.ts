@@ -3,10 +3,15 @@ import { Entity, Column, BaseEntity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class ShoppingCart extends BaseEntity {
 
-  @PrimaryGeneratedColumn()
-  id!: string;
+  constructor(userId: number) {
+    super()
+    this.user = userId
+  }
 
-  @Column({ unique: true}) 
-  user!: string;
+  @PrimaryGeneratedColumn()
+  id!: number;
+
+  @Column({ unique: true })
+  user!: number;
 
 }

@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TypeOrmModule } from '@nestjs/typeorm'; 
-import { Contents } from './entities/Contents'
-import { ShoppingCart } from './entities/ShoppingCart'
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Contents } from '../entities/Contents';
+import { ShoppingCart } from '../entities/ShoppingCart';
 
 @Module({
   imports: [
@@ -12,13 +12,16 @@ import { ShoppingCart } from './entities/ShoppingCart'
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'root',
+      password: 'password',
       database: 'shoppingcart',
       entities: [Contents, ShoppingCart],
+      dropSchema: true,
       synchronize: true,
     }),
+    TypeOrmModule.forFeature([ShoppingCart]),
+    TypeOrmModule.forFeature([Contents])
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
