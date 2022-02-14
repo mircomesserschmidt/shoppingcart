@@ -1,6 +1,5 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
-import { createDatabase } from "typeorm-extension";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
