@@ -9,7 +9,7 @@ import { ShoppingCart } from '../entities/ShoppingCart';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: 'shoppingcart_db',
       port: 3306,
       username: 'root',
       password: 'password',
