@@ -1,0 +1,39 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: base
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: mysql
+    command: '--default-authentication-plugin=mysql_native_password'
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
+      interval: 3s
+      retries: 5
+      start_period: 30s
+    secrets:
+      - db-password
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=shoppingcart
+      - MYSQL_USER=root
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
+    expose:
+      - 3306
+  proxy:
+    build: proxy
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+volumes:
+  db-data:
+secrets:
+  db-password:
+    file: ./.secrets/db-password
